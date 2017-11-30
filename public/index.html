@@ -176,12 +176,16 @@
 <script type="text/javascript">
 
 $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
-	   	var long_url = document.getElementById("url").value.replace( /(\s*)/g, ""); // originurl 을 long_url 변수에 담습니다.
-	   	document.getElementById("url").value = long_url;
+	   	var long_url = document.getElementById("url").value.replace( /(\s*)/g, ""); // 입력한 URL에 있는 공백들을 제거해서 변수에 담습니다.
+	   	document.getElementById("url").value = long_url; // 모든 공백을 제거한 URL을 set 합니다.
 	   	
-	   	if(long_url === "")
+	   	if(long_url === "") // URL 공백 체크
 	   	{
 	   		alert("URL을 입력해주세요.");
+	   	}
+	   	else if(long_url.indexOf("http://") == -1) // URL String 에 "http://" 가 있는지 확인
+	   	{
+	   		alert("URL 형식을 다시 확인해주세요.");
 	   	}
 	   	else
 	   	{
