@@ -1,11 +1,22 @@
 class UrlconverterController < ApplicationController
+
+  
     
-    def create
+  def create
     @originurl = params[:originurl] 
     @shorturl = params[:shorturl]
     
-    @short = Converter.create(originurl: @originurl, shorturl: @shorturl)
-    render json: @short
+    if Converter.exists?(originurl: @originurl)
+        @already_short_url = Converter.find_by(originurl: @originurl)
+        render json: @already_short_url
+    else
+        @short = Converter.create(originurl: @originurl, shorturl: @shorturl)
+        render json: @short
+    end
   end
   
+  
+  def index
+  end
+
 end
