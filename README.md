@@ -1,1 +1,1 @@
-# URL shortening database by rails
+# URL shortening by rails & javascipt
