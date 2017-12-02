@@ -48,30 +48,32 @@
 	<div class="jumbotron">
 		<h1>URL Shortening</h1>
 		<h2>Ban Sang Min</h2>
-		<div class="input-group">
-			<input type="text" placeholder="search for" class="form-control" id="url">
-			<input type="text" placeholder="search for" class="form-control" id="shorturl">
-			<span class="input-group-btn">
-			<button type="button" id="convert" class="btn btn-primary">Convert</button>
-			</span>
-		</div>
+		<!--<div class="input-group col-sm-offset-1">-->
+		<!--	<input type="text" placeholder="URL" class="form-control" id="url" onkeydown = "if(event.keyCode==13) submit();">-->
+		<!--	<input type="text" placeholder="Short URL" class="form-control " id="shorturl" style="margin-top:25px">-->
+		<!--	<button type="submit" id="convert" class="btn btn-primary" style="margin-left: 70px">Convert</button>-->
+		<!--</div>-->
+		<form>
+			<div class="form-group">
+				<label>URL</label>
+				<input class="form-control" id="url" placeholder="Enter URL">
+			</div>
+			<div class="form-group">
+				<label>Short URL</label>
+				<input class="form-control" id="shorturl" placeholder="Short URL">
+			</div>
+			<button type="button" id="convert" class="btn btn-primary">Converter</button>
+		</form>
 	</div>
 </div>
 </section>
 <section class="four-col-services" id="services">
 <div class="container">
 	<div class="row">
-		<h2 class="text-center">Visit my Github</h2>
-
-		<div class="col-lg-4 col-md-4 col-sm-6 text-center service-block down-effect">
-			<i class="fa fa-floppy-o" aria-hidden="true"></i>
-			<h3>Heading</h3>
-			<p>
-				Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.
-			</p>
+		<h2 class="text-center"><a href="https://github.com/tkdals1119/url_shortening">Github</a></h2>
+		<div class="col-lg-4 col-md-4 col-sm-offset-4 text-center service-block down-effect">
+			<a href="https://github.com/tkdals1119/url_shortening"><img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" width="150" , height="150"></a>
 		</div>
-		
-		
 	</div>
 </div>
 </section>
@@ -79,7 +81,7 @@
 <div class="container">
 	<div class="row">
 		<p class="text-center">
-			Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+			 스마일게이트 서버개발캠프
 		</p>
 	</div>
 </div>
@@ -132,19 +134,24 @@
     }
 });
     </script>
-    
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">  
-
 $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	var long_url = document.getElementById("url").value.replace( /(\s*)/g, ""); // 입력한 URL에 있는 공백들을 제거해서 변수에 담습니다.
 	   	document.getElementById("url").value = long_url; // 모든 공백을 제거한 URL을 set 합니다.
+	   	// URL 표준 검사를 하기 전에 공백, 'https' 포함 여부체크
 	   	
-	   	if(long_url === "") // URL 공백 체크
+	   	if(long_url.indexOf("https://") == -1)
+	   	{
+	   		long_url="https://"+long_url;
+	   	}
+	   	
+	   	// URL regular expression 체크
+	   	if(long_url === "")
 	   	{
 	   		alert("URL을 입력해주세요.");
 	   	}
-	   	else if(urlcheck(long_url)==false) // URL String 에 "https://" 가 있는지 확인
+	    else if(urlcheck(long_url)==false)
 	   	{
 	   		alert("URL 형식을 다시 확인해주세요.");
 	   	}
@@ -152,8 +159,7 @@ $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	{
 	   	var base = new Array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0');
 			var short_url = "https://urishortening-db-sangm2n.c9users.io/"+randomItem(base); // randonItem 함수를 이용해서 base배열의 원소를 무작위로 추출합니다.
-		
-			$.ajax({ // ajax를 이용해서 long_url 과 short_url 을 서버로 전송하고, json 객체를 받아와서 'shorturl' 속성만 추출합니다.
+			$.ajax({ // long_url 과 short_url 을 서버로 전송하고, json 객체를 받아와서 'shorturl' 속성만 추출합니다.
 				type:"GET",
 				url:"/create",
 				data: {originurl: long_url,
@@ -165,26 +171,21 @@ $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 		  });
 	   	}
 	});
-	
 function randomItem(a) // 배열 원소 랜덤 반환
 {
 	var shorten = new Array();
 	var random_num = Math.floor(Math.random()*8)+1; // http://localhost/ 이어서 몇 글자가 생성될지 1~8 숫자 내로 정합니다.
-
 	for(var i=0; i<random_num; i++)
 	{
 		shorten[i] = a[Math.floor(Math.random() * a.length)]; // 파라미터로 받아온 a배열, 즉 base배열에서 random_num 만큼 무작위로 문자를 추출합니다.
 	}
-
 	var result = shorten.join(''); // shorten 배열에 있는 모든 원소들을 붙입니다.
   return result;
 }
-
-function urlcheck(long_url)
+function urlcheck(long_url) // URL regular expression
 {
   var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   var regex = new RegExp(expression);
-
   if (long_url.match(regex)) 
   {
     return true;
@@ -194,9 +195,6 @@ function urlcheck(long_url)
     return false;
   }
 }
-
 </script>
-    
-    
 </body>
 </html>
