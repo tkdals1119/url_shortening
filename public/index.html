@@ -81,7 +81,11 @@
 <div class="container">
 	<div class="row">
 		<p class="text-center">
+<<<<<<< HEAD
 			 스마일게이트 서버개발캠프 반상민
+=======
+			 스마일게이트 서버개발캠프
+>>>>>>> 9dfdec174f2d4bc59d2d531d4712d0dc55303b07
 		</p>
 	</div>
 </div>
@@ -139,7 +143,14 @@
 $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	var long_url = document.getElementById("url").value.replace( /(\s*)/g, ""); // 입력한 URL에 있는 공백들을 제거해서 변수에 담습니다.
 	   	document.getElementById("url").value = long_url; // 모든 공백을 제거한 URL을 set 합니다.
+	   	// URL 표준 검사를 하기 전에 공백, 'https' 포함 여부체크
 	   	
+	   	if(long_url.indexOf("https://") == -1)
+	   	{
+	   		long_url="https://"+long_url;
+	   	}
+	   	
+<<<<<<< HEAD
 	    // URL 표준 검사를 하기 전에 공백, 'https' 포함 여부체크
 	   	// if(long_url.indexOf("https://") == -1 || (long_url.indexOf("http://") == -1))
 	   	// {
@@ -148,6 +159,9 @@ $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	
 	   	// URL regular expression 체크
 	   	
+=======
+	   	// URL regular expression 체크
+>>>>>>> 9dfdec174f2d4bc59d2d531d4712d0dc55303b07
 	   	if(long_url === "")
 	   	{
 	   		alert("URL을 입력해주세요.");
