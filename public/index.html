@@ -63,6 +63,7 @@
 				<input class="form-control" id="shorturl" placeholder="Short URL">
 			</div>
 			<button type="button" id="convert" class="btn btn-primary">Converter</button>
+			<button type="button" id="copy" class="btn btn-primary clipboard" data-clipboard-target="#shorturl">Copy</button>
 		</form>
 	</div>
 </div>
@@ -81,11 +82,7 @@
 <div class="container">
 	<div class="row">
 		<p class="text-center">
-<<<<<<< HEAD
 			 스마일게이트 서버개발캠프 반상민
-=======
-			 스마일게이트 서버개발캠프
->>>>>>> 9dfdec174f2d4bc59d2d531d4712d0dc55303b07
 		</p>
 	</div>
 </div>
@@ -93,6 +90,7 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -149,19 +147,9 @@ $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	{
 	   		long_url="https://"+long_url;
 	   	}
-	   	
-<<<<<<< HEAD
-	    // URL 표준 검사를 하기 전에 공백, 'https' 포함 여부체크
-	   	// if(long_url.indexOf("https://") == -1 || (long_url.indexOf("http://") == -1))
-	   	// {
-	   	// 	long_url="https://"+long_url;
-	   	// }
-	   	
+
 	   	// URL regular expression 체크
-	   	
-=======
-	   	// URL regular expression 체크
->>>>>>> 9dfdec174f2d4bc59d2d531d4712d0dc55303b07
+
 	   	if(long_url === "")
 	   	{
 	   		alert("URL을 입력해주세요.");
@@ -186,6 +174,12 @@ $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 		  });
 	   	}
 	});
+window.onload = function(){
+    $(document).ready(function(){
+        var clipboard = new Clipboard('.clipboard');
+    });
+};
+	
 function randomItem(a) // 배열 원소 랜덤 반환
 {
 	var shorten = new Array();
