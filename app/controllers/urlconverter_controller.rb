@@ -24,12 +24,12 @@ class UrlconverterController < ApplicationController
     @getorigin = Converter.find_by(shorturl: @sendshort)
     
     
-    if @getorigin.originurl.include? "https://"
-      puts @getorigin.originurl 
-    else
-      @getorigin.originurl = "https://"+@getorigin.originurl
-      puts @getorigin.originurl
-    end
+    # if @getorigin.originurl.include? "https://"
+    #   puts @getorigin.originurl 
+    # else
+    #   @getorigin.originurl = "https://"+@getorigin.originurl
+    #   puts @getorigin.originurl
+    # end
     
       redirect_to @getorigin.originurl
 
