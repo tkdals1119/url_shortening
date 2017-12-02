@@ -17,13 +17,21 @@ class UrlconverterController < ApplicationController
   def index
   end
   
-  def convert
+  def convert # short URL 을 origin URL 로 redirect 하는 부분입니다.
     @getshort = params[:shorturl]
     @sendshort = "https://urishortening-db-sangm2n.c9users.io/" + @getshort
     
     @getorigin = Converter.find_by(shorturl: @sendshort)
     
-    puts @getorigin.originurl
-    redirect_to @getorigin.originurl
+    
+    if @getorigin.originurl.include? "https://"
+      puts @getorigin.originurl 
+    else
+      @getorigin.originurl = "https://"+@getorigin.originurl
+      puts @getorigin.originurl
+    end
+    
+      redirect_to @getorigin.originurl
+
   end
 end
