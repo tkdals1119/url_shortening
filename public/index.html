@@ -48,7 +48,6 @@
 	<div class="jumbotron">
 		<h1>URL Shortening</h1>
 		<h2>Ban Sang Min</h2>
-
 		<form>
 			<div class="form-group">
 				<label>URL</label>
@@ -137,48 +136,44 @@
 $('#convert').click(function() { // convert 버튼 이벤트 함수 입니다.
 	   	var long_url = document.getElementById("url").value.replace( /(\s*)/g, ""); // 입력한 URL에 있는 공백들을 제거해서 변수에 담습니다.
 	   	document.getElementById("url").value = long_url; // 모든 공백을 제거한 URL을 set 합니다.
-	   	
-	   	// URL 표준 검사를 하기 전에 공백, 'https' 포함 여부체크
+	   	// URL 표준 검사를 하기 전 http, https 포함 여부체크
 	   	if(long_url.indexOf("://") == -1)
 	   	{
 	   		alert("http:// 혹은 https://를 기재해 주세요.");
 	   	}
 	   	else
 	   	{
-	   		// URL regular expression 체크
-	   	if(long_url === "")
-	   	{
-	   		alert("URL을 입력해주세요.");
-	   	}
-	    else if(urlcheck(long_url)==false)
-	   	{
-	   		alert("URL 형식을 다시 확인해주세요.");
-	   	}
-	   	else
-	   	{
-	   	var base = new Array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0');
-			var short_url = "http://"+window.location.hostname+"/"+randomItem(base); // randonItem 함수를 이용해서 base배열의 원소를 무작위로 추출합니다.
-			$.ajax({ // long_url 과 short_url 을 서버로 전송하고, json 객체를 받아와서 'shorturl' 속성만 추출합니다.
-				type:"GET",
-				url:"/create",
-				data: {originurl: long_url,
-					   shorturl: short_url},
-					   success: function(data)
-					   {
-					       document.getElementById("shorturl").value = data.shorturl;
-					   }
-		  });
-	   	}
-	   	}
+			if(long_url === "") // 공백 체크
+	   		{
+	   			alert("URL을 입력해주세요.");
+	   		}
+	    	else if(urlcheck(long_url)==false) // URL regular expression 체크
 
-	   	
+	   		{
+	   			alert("URL 형식을 다시 확인해주세요.");
+	   		}
+	   		else
+	   		{
+	   			var base = new Array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0');
+				var short_url = "http://"+window.location.hostname+"/"+randomItem(base); // randonItem 함수를 이용해서 base배열의 원소를 무작위로 추출합니다.
+					$.ajax({ // long_url 과 short_url 을 서버로 전송하고, json 객체를 받아와서 'shorturl' 속성만 추출합니다.
+						type:"GET",
+						url:"/create",
+						data: {originurl: long_url,
+						shorturl: short_url},
+						success: function(data)
+						{
+					       document.getElementById("shorturl").value = data.shorturl;
+						}
+							});
+	   	}
+	   	}
 	});
-window.onload = function(){
+window.onload = function(){ // 복사 버튼 이벤트
     $(document).ready(function(){
         var clipboard = new Clipboard('.clipboard');
     });
 };
-	
 function randomItem(a) // 배열 원소 랜덤 반환
 {
 	var shorten = new Array();
