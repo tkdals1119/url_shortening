@@ -173,6 +173,7 @@ window.onload = function(){ // 복사 버튼 이벤트
         var clipboard = new Clipboard('.clipboard');
     });
 };
+
 function randomItem(a) // 배열 원소 랜덤 반환
 {
 	var shorten = new Array();
@@ -181,7 +182,7 @@ function randomItem(a) // 배열 원소 랜덤 반환
 	{
 		shorten[i] = a[Math.floor(Math.random() * a.length)]; // 파라미터로 받아온 a배열, 즉 base배열에서 random_num 만큼 무작위로 문자를 추출합니다.
 	}
-	var result = shorten.join(''); // shorten 배열에 있는 모든 원소들을 붙입니다.
+	var result = shorten.join(''); // shorten배열에 있는 모든 원소들을 붙입니다.
   return result;
 }
 function urlcheck(long_url) // URL regular expression
