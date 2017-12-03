@@ -30,16 +30,16 @@ class UrlconverterController < ApplicationController
 
     
     
-    if @getorigin.originurl.include? "https://"
-      puts @getorigin.originurl 
+    # if @getorigin.originurl.include? "https://"
+    #   puts @getorigin.originurl 
       
-    elsif @getorigin.originurl.include? "http://"
-     puts @getorigin.originurl 
+    # elsif @getorigin.originurl.include? "http://"
+    # puts @getorigin.originurl 
 
-    else
-      @getorigin.originurl = "http://"+@getorigin.originurl
-      puts @getorigin.originurl
-    end
+    # else
+    #   @getorigin.originurl = "http://"+@getorigin.originurl
+    #   puts @getorigin.originurl
+    # end
     
       redirect_to @getorigin.originurl
 
