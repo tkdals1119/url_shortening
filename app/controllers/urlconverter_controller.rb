@@ -26,6 +26,8 @@ class UrlconverterController < ApplicationController
     puts "@@@@@@@@@@@@@@@"
     puts @sendshort
     puts @getorigin
+    puts "@@@@@@@@@@@@@@@"
+
     
     
     if @getorigin.originurl.include? "https://"
